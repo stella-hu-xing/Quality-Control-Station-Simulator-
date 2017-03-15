@@ -5,10 +5,12 @@ public class Sensor extends BicycleHandlingThread {
 	protected Belt belt;
 	protected Robot robot;
 
-	public Sensor(Belt belt, Robot robot) {
+
+	public Sensor(Belt belt, Robot robot, BeltMover bm) {
 		super();
 		this.belt = belt;
 		this.robot = robot;
+		
 	}
 
 	private boolean temp = false;
@@ -21,13 +23,15 @@ public class Sensor extends BicycleHandlingThread {
 				Bicycle bike = belt.peek(2);
 
 
-
-
 				if (bike != null && bike.isTagged() == true && bike.hasInspected == false
-						&& robot.robotAction == false) {
+						&& robot.isWorking == false) {
 					System.out.println("sensor find bike " + bike);
 
-					robot.robotAction = true;
+					robot.isWorking = true;
+					belt.metDeadlock = false;
+				}else if(bike!=null&&bike.isTagged()==true && bike.hasInspected==false && robot.isWorking==true){
+					belt.metDeadlock = true;
+					System.out.println("waiting for");
 				}
 				temp = belt.hasMoved;
 			}

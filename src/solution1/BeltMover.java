@@ -24,6 +24,7 @@ public class BeltMover extends BicycleHandlingThread {
     public void run() {
         while (!isInterrupted()) {
             try {
+            	
                 // spend BELT_MOVE_TIME milliseconds moving the belt
                 Thread.sleep(Params.BELT_MOVE_TIME);
                 

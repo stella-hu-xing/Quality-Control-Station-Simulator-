@@ -17,7 +17,7 @@ public class Sim {
        
         Inspector inspector = new Inspector();
         Robot robot = new Robot(belt,inspector);
-        Sensor sensor = new Sensor(belt,robot);
+        Sensor sensor = new Sensor(belt,robot,mover);
         
         consumer.start();
         producer.start();

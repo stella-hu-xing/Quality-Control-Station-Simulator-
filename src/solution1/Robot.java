@@ -2,7 +2,7 @@ package solution1;
 
 public class Robot extends BicycleHandlingThread {
 
-	protected boolean robotAction = false;
+	protected boolean isWorking = false;
 
 	Belt belt;
 
@@ -15,11 +15,11 @@ public class Robot extends BicycleHandlingThread {
 
 	public void run() {
 		while (!isInterrupted()) {
-			if (robotAction == true && inspector.isAvaliable == true) {
+			if (isWorking == true && inspector.isAvaliable == true) {
 				try {
 				//	sleep(Params.ROBOT_MOVE_TIME);
 					transferBetweenInspectorAndBelt();
-					robotAction = false;
+					isWorking = false;
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
