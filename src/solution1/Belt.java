@@ -13,7 +13,7 @@ public class Belt {
 
 	protected boolean hasMoved = false;
 
-	protected boolean metDeadlock = false;
+	protected boolean canMove = true;
 
 	// to help format output trace
 	final private static String indentation = "                  ";
@@ -110,7 +110,7 @@ public class Belt {
 	public synchronized void move() throws InterruptedException, OverloadException {
 		// if there is something at the end of the belt,
 		// or the belt is empty, do not move the belt
-		while (isEmpty() || segment[segment.length - 1] != null|| metDeadlock == true) {
+		while (isEmpty() || segment[segment.length - 1] != null|| canMove == false) {
 			wait();
 		}
 

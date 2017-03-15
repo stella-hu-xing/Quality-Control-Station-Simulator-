@@ -28,9 +28,9 @@ public class Sensor extends BicycleHandlingThread {
 					System.out.println("sensor find bike " + bike);
 
 					robot.isWorking = true;
-					belt.metDeadlock = false;
+					belt.canMove = true;
 				}else if(bike!=null&&bike.isTagged()==true && bike.hasInspected==false && robot.isWorking==true){
-					belt.metDeadlock = true;
+					belt.canMove = false;
 					System.out.println("waiting for");
 				}
 				temp = belt.hasMoved;
