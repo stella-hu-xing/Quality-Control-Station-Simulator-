@@ -1,4 +1,4 @@
-package solution1;
+package solution2;
 /**
  * A belt-mover moves a belt along as often as possible, but only
  * when there is a bicycle on the belt not at the last position.
@@ -8,7 +8,7 @@ public class BeltMover extends BicycleHandlingThread {
 
     // the belt to be handled
     protected Belt belt;
-  
+
 
     /**
      * Create a new BeltMover with a belt to move

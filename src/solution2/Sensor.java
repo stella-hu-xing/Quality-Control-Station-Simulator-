@@ -1,4 +1,4 @@
-package solution1;
+package solution2;
 
 public class Sensor extends BicycleHandlingThread {
 
@@ -29,9 +29,11 @@ public class Sensor extends BicycleHandlingThread {
 
 					robot.isWorking = true;
 					belt.canMove = true;
+					
 				}else if(bike!=null&&bike.isTagged()==true && bike.hasInspected==false && robot.isWorking==true){
 					belt.canMove = false;
-					System.out.println("waiting for");
+					
+					System.out.println("waiting for inspector to be finished");
 				}
 				temp = belt.hasMoved;
 			}

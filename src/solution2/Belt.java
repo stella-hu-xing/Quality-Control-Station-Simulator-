@@ -1,4 +1,4 @@
-package solution1;
+package solution2;
 
 /**
  * The bicycle quality control belt
@@ -77,7 +77,7 @@ public class Belt {
 
 		// make a note of the event in output trace
 		System.out.print(indentation + indentation);
-		System.out.println(bicycle + " departed");
+		System.out.println(bicycle + " departed from main belt");
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
