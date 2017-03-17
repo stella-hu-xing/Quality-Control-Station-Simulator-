@@ -38,11 +38,12 @@ public class Robot extends BicycleHandlingThread {
 		if (bike != null) {
 			System.out.println("robot put " + bike+"  to inspector");
 
+			inspector.isAvaliable = false;
 			bike = inspector.inspect(bike);
 			Thread.sleep(Params.INSPECT_TIME);
 			
             belt.put(bike, 2);
-           
+            
             System.out.println("robot put " + bike+"  back to belt");
 		}
 	}

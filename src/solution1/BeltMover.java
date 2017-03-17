@@ -8,6 +8,7 @@ public class BeltMover extends BicycleHandlingThread {
 
     // the belt to be handled
     protected Belt belt;
+    protected boolean canMove = true;
 
     /**
      * Create a new BeltMover with a belt to move
@@ -28,10 +29,11 @@ public class BeltMover extends BicycleHandlingThread {
                 // spend BELT_MOVE_TIME milliseconds moving the belt
                 Thread.sleep(Params.BELT_MOVE_TIME);
                 
-//                if(belt.findTagged==true){
-//                //	System.out.println("sleeping for the robot");
-//                	Thread.sleep(Params.ROBOT_MOVE_TIME*2);
-//                }
+               while(canMove == false){
+            	   synchronized (belt){
+            		   belt.wait();
+            	   }
+               }
                 belt.move();
             } catch (OverloadException e) {
                 terminate(e);
