@@ -16,7 +16,7 @@ public class Belt {
 
 	
 	//the move status of the belt
-	private boolean canMove = true;
+	private volatile boolean canMove = true;
 
 	// to help format output trace
 	final public static String indentation = "                  ";

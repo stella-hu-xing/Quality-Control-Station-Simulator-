@@ -2,7 +2,7 @@ package solution1;
 
 public class Robot extends BicycleHandlingThread {
 
-	protected boolean isRobotOccupied = false;
+	protected volatile boolean isRobotOccupied = false;
 
 	protected Belt belt;
 

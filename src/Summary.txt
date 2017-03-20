@@ -2,7 +2,7 @@
 
 1. check all sleeping methods                                                 (get!)
 
-2. try to change all while loop into wait() and notify() methods..
+2. try to change all while loop into wait() and notify() methods..            (get!)
     1) insepctor as a monitor,while robot using it
     2) short belt ..need to wait .. 
     

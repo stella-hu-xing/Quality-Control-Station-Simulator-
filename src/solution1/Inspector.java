@@ -2,7 +2,7 @@ package solution1;
 
 public class Inspector  {
 
-	protected boolean isInspectorAvailable = true;
+	protected volatile boolean isInspectorAvailable = true;
 
 	// to help format output trace
 	final public static String indentation = "                  ";
