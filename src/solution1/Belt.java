@@ -19,7 +19,7 @@ public class Belt {
 	private boolean canMove = true;
 
 	// to help format output trace
-	final private static String indentation = "                  ";
+	final public static String indentation = "                  ";
 
 	/**
 	 * Create a new, empty belt, initialised as empty
@@ -97,7 +97,7 @@ public class Belt {
 		bike = segment[2];
 		segment[2] = null;
 
-		System.out.println("the bike " + bike + " has been removed");
+		System.out.println(indentation+indentation+indentation+"the bike " + bike + " has been taken by robot arm from belt");
 
 		return bike;
 	}
@@ -113,7 +113,6 @@ public class Belt {
 	public synchronized void move() throws InterruptedException, OverloadException {
 		// if there is something at the end of the belt,
 		// or the belt is empty, do not move the belt
-	//	while (isEmpty() || segment[segment.length - 1] != null|| canMove == false) {
 		while (isEmpty() || segment[segment.length - 1] != null) {
 			wait();
 		}

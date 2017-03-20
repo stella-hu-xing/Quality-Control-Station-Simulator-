@@ -1,14 +1,14 @@
 现存问题：
 
-1. check all sleeping methods
+1. check all sleeping methods                                                 (get!)
 
 2. try to change all while loop into wait() and notify() methods..
     1) insepctor as a monitor,while robot using it
-    2) short belt ..need to wait ..
+    2) short belt ..need to wait .. 
     
-3. manage all output and code Layout
+3. manage all output and code Layout                                          (get!)
 
-4. change all using of direct variable to Set() and Get() methods
+4. change all using of direct variable to Set() and Get() methods             (get!)
 
 5. finish all comments and reflection
 

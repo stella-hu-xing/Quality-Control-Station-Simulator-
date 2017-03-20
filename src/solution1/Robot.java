@@ -34,19 +34,27 @@ public class Robot extends BicycleHandlingThread {
 
 	protected synchronized void transferBetweenInspectorAndBelt() throws InterruptedException {
 
+		System.out.println(
+				belt.indentation + belt.indentation + belt.indentation + "robot is ready to take bicycle from belt");
+
 		Bicycle bike = belt.removeBicycle();
 
 		if (bike != null) {
-			System.out.println("robot put " + bike + "  to inspector");
+			sleep(Params.ROBOT_MOVE_TIME);
 
-			// inspector.isInspectorAvailable() = false;
+			System.out.println(belt.indentation + belt.indentation + belt.indentation + "robot get bicycle and put "
+					+ bike + "  to inspector");
+
 			inspector.setInspectorOccupied();
 			bike = inspector.inspect(bike);
-			Thread.sleep(Params.INSPECT_TIME);
 
+			System.out.println(belt.indentation + belt.indentation + belt.indentation
+					+ "robot is waiting segment3 availabe to put  " + bike + "  back to belt");
+
+			sleep(Params.ROBOT_MOVE_TIME);
 			belt.put(bike, 2);
-
-			System.out.println("robot put " + bike + "  back to belt");
+			System.out.println(belt.indentation + belt.indentation + belt.indentation + "robot has sucessfully put "
+					+ bike + "  back to belt");
 		}
 	}
 

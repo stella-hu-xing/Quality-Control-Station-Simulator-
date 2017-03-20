@@ -25,7 +25,7 @@ public class Params {
 	public final static int INSPECT_TIME = 5000;
 		
 	// probability that a bicycle is tagged
-	public final static double TAG_PROB = 0.1;
+	public final static double TAG_PROB = 0.2;
 	
 	// probability that a tagged bicycle is defective
 	public final static double DEFECT_PROB = 0.7;
