@@ -26,9 +26,12 @@ public class Consumer extends BicycleHandlingThread {
     public void run() {
         while (!isInterrupted()) {
             try {
+            	if (belt.segment[4] != null) {
                 belt.getEndBelt();
+            	}
 				if (shortBelt.segment_shortBelt[1] != null) {
                 shortBelt.getEndBelt();
+              
                 }
 
                 // let some time pass ...

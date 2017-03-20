@@ -11,8 +11,6 @@ public class Belt {
 	// the length of this belt
 	protected int beltLength = 5;
 
-	protected boolean hasMoved = false;
-
 	protected boolean canMove = true;
 
 	// to help format output trace
@@ -129,9 +127,6 @@ public class Belt {
 			segment[i] = segment[i - 1];
 		}
 		segment[0] = null;
-
-
-		hasMoved = !hasMoved;
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();

@@ -19,7 +19,7 @@ public class Inspector extends BicycleHandlingThread {
 
 		if (bike.tagged == true && bike.defective != true) {
 			bike.setNotTagged();
-			bike.hasInspected = true;
+		//	bike.hasInspected = true;
 			System.out.println("inspector checked the bike " + bike.getId());
 
 		}

@@ -19,24 +19,23 @@ public class Sensor extends BicycleHandlingThread {
 
 		while (!isInterrupted()) {
 
-			if (belt.hasMoved != temp) {
+	
 				Bicycle bike = belt.peek(2);
 
 
-				if (bike != null && bike.isTagged() == true && bike.hasInspected == false
+				if (bike != null && bike.isTagged() == true //&& bike.hasInspected == false
 						&& robot.isWorking == false) {
 					System.out.println("sensor find bike " + bike);
 
 					robot.isWorking = true;
-					belt.canMove = true;
 					
-				}else if(bike!=null&&bike.isTagged()==true && bike.hasInspected==false && robot.isWorking==true){
+				}else if(bike!=null&&bike.isTagged()==true //&& bike.hasInspected==false 
+						&& robot.isWorking==true){
 					belt.canMove = false;
 					
-					System.out.println("waiting for inspector to be finished");
+				//	System.out.println("waiting for inspector to be finished");
 				}
-				temp = belt.hasMoved;
-			}
+
 
 		}
 

@@ -47,8 +47,13 @@ public class Robot extends BicycleHandlingThread {
 			System.out.println("Inspector has finished inspecting" + bike);
 			System.out.println("robot put " + bike + "   to short belt");
 			shortBelt.put(bike, 0);
-			belt.canMove = true;
+			           
+    		synchronized (belt){
+    			belt.canMove = true;
 
+				belt.notifyAll();
+				System.out.println("notify all 了啊！！ ");
+			}
 		}
 	}
 
