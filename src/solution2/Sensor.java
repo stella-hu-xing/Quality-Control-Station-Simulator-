@@ -19,7 +19,7 @@ public class Sensor extends BicycleHandlingThread {
 			Bicycle bike = belt.peek(2);
 
 			if (bike != null && bike.isTagged() == true && robot.isRobotOccupied() == false) {
-				
+
 				System.out.println();
 				System.out.println(
 						belt.indentation + belt.indentation + belt.indentation + "sensor find a tagged bike " + bike);

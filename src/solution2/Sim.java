@@ -9,15 +9,18 @@ public class Sim {
      */
     public static void main(String[] args) {
         
+    	System.out.println("this is solution 2");
+    	
         Belt belt = new Belt();
         ShortBelt shortBelt = new ShortBelt();
+        Inspector inspector = new Inspector();
+        
         Producer producer = new Producer(belt);
         Consumer consumer = new Consumer(belt,shortBelt);
         BeltMover mover1 = new BeltMover(belt);
         BeltMover mover2 = new BeltMover(shortBelt);
-        
        
-        Inspector inspector = new Inspector();
+       
         Robot robot = new Robot(belt,inspector,shortBelt);
         Sensor sensor = new Sensor(belt,robot);
         
@@ -27,7 +30,7 @@ public class Sim {
         mover2.start();
         sensor.start();
         robot.start();
-        inspector.start();
+     
 
         while (consumer.isAlive() && 
                producer.isAlive() && 
@@ -45,7 +48,6 @@ public class Sim {
         mover1.interrupt();
         mover2.interrupt();
         sensor.interrupt();
-        inspector.interrupt();
         robot.interrupt();
 
         System.out.println("Sim terminating");

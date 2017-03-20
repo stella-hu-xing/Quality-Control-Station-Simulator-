@@ -12,8 +12,10 @@
 
 5. finish all comments and reflection
 
-6. all subclass need to add super() into all overrided methods
-
-(possible need one day -- 3 hours)
+6. all subclass need to add super() into all overrided methods                (get!)
 
 7. makefile 
+
+8. delete all packages
+
+9. make some variable to be volatile

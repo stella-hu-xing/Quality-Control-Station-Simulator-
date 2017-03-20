@@ -108,4 +108,8 @@ public class ShortBelt extends Belt {
 		return true;
 	}
 
+	public int length() {
+		return shortBeltLength;
+	}
+
 }

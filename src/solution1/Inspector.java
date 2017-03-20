@@ -1,28 +1,22 @@
 package solution1;
 
-public class Inspector extends BicycleHandlingThread {
+public class Inspector  {
 
 	protected boolean isInspectorAvailable = true;
 
 	// to help format output trace
 	final public static String indentation = "                  ";
 
-	public void run() {
-
-		while (!isInterrupted()) {
-
-		}
-
-		System.out.println("Inspector terminated");
-
-	}
 
 	protected synchronized Bicycle inspect(Bicycle bike) throws InterruptedException {
 
+		while(isInspectorAvailable == true){
+			wait();
+		}
 		System.out.println(indentation + indentation + indentation + "The Inspctor is ready to check " + bike
 				+ "in a inspect time");
 
-		sleep(Params.INSPECT_TIME);
+		Thread.sleep(Params.INSPECT_TIME);
 
 		if (bike.isTagged() == true && bike.isDefective() != true) {
 
@@ -42,6 +36,7 @@ public class Inspector extends BicycleHandlingThread {
 		}
 		// isAvaliable = true;
 		setInspectorAvailable();
+		notifyAll();
 		return bike;
 	}
 

@@ -1,0 +1,9 @@
+Reflection:
+
+The file reflection.txt should contain 300–500 words evaluating the success or otherwise of your solution, identifying critical design decisions or problems that arose, and summarising any insights from experimenting with the simulator.
+
+(1. problem description)
+(2. important decision and their result)
+(3. understanding of concurrency)
+
+
