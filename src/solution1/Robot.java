@@ -2,9 +2,9 @@ package solution1;
 
 public class Robot extends BicycleHandlingThread {
 
-	protected boolean isWorking = false;
+	protected boolean isRobotOccupied = false;
 
-	Belt belt;
+	protected Belt belt;
 
 	protected Inspector inspector;
 
@@ -15,11 +15,12 @@ public class Robot extends BicycleHandlingThread {
 
 	public void run() {
 		while (!isInterrupted()) {
-			if (isWorking == true && inspector.isAvaliable == true) {
+			if (isRobotOccupied == true && inspector.isInspectorAvailable() == true) {
 				try {
-				//	sleep(Params.ROBOT_MOVE_TIME);
+					// sleep(Params.ROBOT_MOVE_TIME);
 					transferBetweenInspectorAndBelt();
-					isWorking = false;
+					// isWorking = false;
+					setRobotAvailable();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -36,16 +37,29 @@ public class Robot extends BicycleHandlingThread {
 		Bicycle bike = belt.removeBicycle();
 
 		if (bike != null) {
-			System.out.println("robot put " + bike+"  to inspector");
+			System.out.println("robot put " + bike + "  to inspector");
 
-			inspector.isAvaliable = false;
+			// inspector.isInspectorAvailable() = false;
+			inspector.setInspectorOccupied();
 			bike = inspector.inspect(bike);
 			Thread.sleep(Params.INSPECT_TIME);
-			
-            belt.put(bike, 2);
-            
-            System.out.println("robot put " + bike+"  back to belt");
+
+			belt.put(bike, 2);
+
+			System.out.println("robot put " + bike + "  back to belt");
 		}
+	}
+
+	public boolean isRobotOccupied() {
+		return isRobotOccupied;
+	}
+
+	public void setRobotOccupied() {
+		isRobotOccupied = true;
+	}
+
+	public void setRobotAvailable() {
+		isRobotOccupied = false;
 	}
 
 }

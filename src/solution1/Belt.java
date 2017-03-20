@@ -10,10 +10,13 @@ public class Belt {
 
 	// the length of this belt
 	protected int beltLength = 5;
+	
+	
+	private boolean hasMoved = false;
 
-	protected boolean hasMoved = false;
-
-	protected boolean canMove = true;
+	
+	//the move status of the belt
+	private boolean canMove = true;
 
 	// to help format output trace
 	final private static String indentation = "                  ";
@@ -182,5 +185,21 @@ public class Belt {
 	 */
 	public int getEndPos() {
 		return beltLength - 1;
+	}
+	
+	public void setBeltCanMove(){
+		canMove = true;
+	}
+	
+	public void setBeltStop(){
+		canMove = false;
+	}
+	
+	public boolean isCanMove(){
+		return canMove;
+	}
+	
+	public boolean haveMovedOnce(){
+		return hasMoved;
 	}
 }

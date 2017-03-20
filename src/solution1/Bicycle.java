@@ -15,8 +15,8 @@ public class Bicycle {
 	protected boolean defective = false;
 
 	// specifies whether the bicycle has been inspected
-	protected boolean hasInspected = false;
-	
+	private boolean hasInspected = false;
+
 	// the ID of this bicycle
 	protected int id;
 
@@ -26,7 +26,7 @@ public class Bicycle {
 	// create a new bicycle with a given ID
 	private Bicycle(int id) {
 		this.id = id;
-		hasInspected = false;
+		this.hasInspected = false;
 
 		if (r.nextFloat() < Params.TAG_PROB) {
 			tagged = true;
@@ -76,6 +76,16 @@ public class Bicycle {
 	 */
 	public void setNotTagged() {
 		tagged = false;
+	}
+
+	
+	
+	public boolean isInspected() {
+		return hasInspected;
+	}
+
+	public void setInspected() {
+		hasInspected = true;
 	}
 
 	/**

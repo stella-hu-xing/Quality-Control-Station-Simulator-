@@ -29,7 +29,7 @@ public class BeltMover extends BicycleHandlingThread {
                 // spend BELT_MOVE_TIME milliseconds moving the belt
                 Thread.sleep(Params.BELT_MOVE_TIME);
                 
-               while(belt.canMove == false){
+               while(belt.isCanMove() == false){
             	   synchronized (belt){
             		   belt.wait();
             	   }

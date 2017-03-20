@@ -15,3 +15,5 @@
 6. all subclass need to add super() into all overrided methods
 
 (possible need one day -- 3 hours)
+
+7. makefile 

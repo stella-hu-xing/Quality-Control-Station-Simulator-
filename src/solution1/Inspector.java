@@ -2,8 +2,7 @@ package solution1;
 
 public class Inspector extends BicycleHandlingThread {
 
-	protected boolean isAvaliable = true;
-	protected Bicycle bikeToCheck;
+	protected boolean isInspectorAvailable = true;
 
 	public void run() {
 
@@ -19,12 +18,25 @@ public class Inspector extends BicycleHandlingThread {
 
 		if (bike.tagged == true && bike.defective != true) {
 			bike.setNotTagged();
-			bike.hasInspected = true;
+			// bike.hasInspected = true;
+			bike.setInspected();
 			System.out.println("inspector checked the bike " + bike.getId());
 
 		}
-        isAvaliable = true;
+		// isAvaliable = true;
+		setInspectorAvailable();
 		return bike;
 	}
 
+	public boolean isInspectorAvailable() {
+		return isInspectorAvailable;
+	}
+
+	public void setInspectorAvailable() {
+		isInspectorAvailable = true;
+	}
+
+	public void setInspectorOccupied() {
+		isInspectorAvailable = false;
+	}
 }
