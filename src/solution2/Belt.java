@@ -11,10 +11,11 @@ public class Belt {
 	// the length of this belt
 	protected int beltLength = 5;
 
-	protected boolean canMove = true;
+	// the move status of the belt
+	private boolean canMove = true;
 
 	// to help format output trace
-	final private static String indentation = "                  ";
+	final public static String indentation = "                  ";
 
 	/**
 	 * Create a new, empty belt, initialised as empty
@@ -47,7 +48,7 @@ public class Belt {
 		segment[index] = bicycle;
 
 		// make a note of the event in output trace
-		System.out.println(bicycle + " arrived" + "  segment "+ (index+1));
+		System.out.println(bicycle + " arrived" + "  segment " + (index + 1));
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
@@ -75,7 +76,7 @@ public class Belt {
 
 		// make a note of the event in output trace
 		System.out.print(indentation + indentation);
-		System.out.println(bicycle + " departed from main belt");
+		System.out.println(bicycle + " departed");
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
@@ -92,7 +93,9 @@ public class Belt {
 		bike = segment[2];
 		segment[2] = null;
 
-		System.out.println("the bike " + bike + " has been removed");
+		System.out.println();
+		System.out.println(indentation + indentation + indentation + "the bike " + bike
+				+ " has been taken by robot arm from belt");
 
 		return bike;
 	}
@@ -108,7 +111,6 @@ public class Belt {
 	public synchronized void move() throws InterruptedException, OverloadException {
 		// if there is something at the end of the belt,
 		// or the belt is empty, do not move the belt
-	//	while (isEmpty() || segment[segment.length - 1] != null|| canMove == false) {
 		while (isEmpty() || segment[segment.length - 1] != null) {
 			wait();
 		}
@@ -178,4 +180,17 @@ public class Belt {
 	public int getEndPos() {
 		return beltLength - 1;
 	}
+
+	public void setBeltCanMove() {
+		canMove = true;
+	}
+
+	public void setBeltStop() {
+		canMove = false;
+	}
+
+	public boolean isCanMove() {
+		return canMove;
+	}
+
 }

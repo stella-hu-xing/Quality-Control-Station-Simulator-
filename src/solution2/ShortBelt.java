@@ -10,7 +10,7 @@ public class ShortBelt extends Belt {
 	protected Bicycle[] segment_shortBelt;
 
 	protected int shortBeltLength = 2;
-	
+
 	final private static String indentation = "                  ";
 
 	public ShortBelt() {
@@ -21,7 +21,7 @@ public class ShortBelt extends Belt {
 	}
 
 	public synchronized void put(Bicycle bicycle, int index) throws InterruptedException {
-		
+
 		// while there is another bicycle in the way, block this thread
 		while (segment_shortBelt[index] != null) {
 			wait();
@@ -31,7 +31,7 @@ public class ShortBelt extends Belt {
 		segment_shortBelt[index] = bicycle;
 
 		// make a note of the event in output trace
-		System.out.println(bicycle + " arrived" + "  segment in short Belt at " + (index + 1));
+		System.out.println(bicycle + " arrived" + "  segment " + (index + 1) + " at Short Belt");
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
@@ -48,10 +48,8 @@ public class ShortBelt extends Belt {
 
 		Bicycle bicycle;
 
-		System.out.println("current want to go to Consumer");
 		// while there is no bicycle at the end of the belt, block this thread
 		while (segment_shortBelt[segment_shortBelt.length - 1] == null) {
-			System.out.println("ready to waiting");
 			wait();
 		}
 
@@ -60,17 +58,16 @@ public class ShortBelt extends Belt {
 		segment_shortBelt[segment_shortBelt.length - 1] = null;
 
 		// make a note of the event in output trace
-		System.out.print(indentation + indentation);
-		System.out.println(bicycle + " departed from short Belt");
+
+		System.out.println(indentation + indentation + bicycle + " departed from short Belt");
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
 		return bicycle;
 	}
-	
+
 	public synchronized void move() throws InterruptedException, OverloadException {
-		
-	
+
 		// if there is something at the end of the belt,
 		// or the belt is empty, do not move the belt
 		while (isEmpty() || segment_shortBelt[segment_shortBelt.length - 1] != null) {
@@ -86,7 +83,8 @@ public class ShortBelt extends Belt {
 		// move the elements along, making position 0 null
 		for (int i = segment_shortBelt.length - 1; i > 0; i--) {
 			if (this.segment_shortBelt[i - 1] != null) {
-				System.out.println("short belt move--"+indentation + this.segment_shortBelt[i - 1] + " [ s" + (i) + " -> s" + (i + 1) + " ]");
+				System.out.println(indentation + this.segment_shortBelt[i - 1] + " [ shortBlet_s" + (i)
+						+ " ->shortBlet_s " + (i + 1) + " ]");
 			}
 			segment_shortBelt[i] = segment_shortBelt[i - 1];
 		}
@@ -96,7 +94,6 @@ public class ShortBelt extends Belt {
 		notifyAll();
 	}
 
-	
 	/**
 	 * Check whether the belt is currently empty
 	 * 

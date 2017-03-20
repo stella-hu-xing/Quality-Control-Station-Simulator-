@@ -24,7 +24,7 @@ public class Inspector extends BicycleHandlingThread {
 
 		sleep(Params.INSPECT_TIME);
 
-		if (bike.tagged == true && bike.defective != true) {
+		if (bike.isTagged() == true && bike.isDefective() != true) {
 
 			bike.setNotTagged();
 			// bike.hasInspected = true;

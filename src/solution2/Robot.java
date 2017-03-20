@@ -2,9 +2,9 @@ package solution2;
 
 public class Robot extends BicycleHandlingThread {
 
-	protected boolean isWorking = false;
+	protected boolean isRobotOccupied = false;
 
-	Belt belt;
+	protected Belt belt;
 
 	protected ShortBelt shortBelt;
 
@@ -18,11 +18,11 @@ public class Robot extends BicycleHandlingThread {
 
 	public void run() {
 		while (!isInterrupted()) {
-			if (isWorking == true && inspector.isAvaliable == true) {
+			if (isRobotOccupied == true && inspector.isInspectorAvailable() == true) {
 				try {
 					// sleep(Params.ROBOT_MOVE_TIME);
 					transferBetweenInspectorAndBelt();
-					isWorking = false;
+					setRobotAvailable();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -35,26 +35,52 @@ public class Robot extends BicycleHandlingThread {
 	}
 
 	protected synchronized void transferBetweenInspectorAndBelt() throws InterruptedException {
+		System.out.println();
+		System.out.println(belt.indentation + belt.indentation + belt.indentation
+				+ "robot is ready to take tagged bicycle from main belt");
 
 		Bicycle bike = belt.removeBicycle();
 
 		if (bike != null) {
-			System.out.println("robot put " + bike + "  to inspector");
+			sleep(Params.ROBOT_MOVE_TIME);
 
-			inspector.isAvaliable = false;
+			System.out.println();
+			System.out.println(belt.indentation + belt.indentation + belt.indentation + "robot get the tagged " + bike
+					+ " and put it to inspector");
+
+			inspector.setInspectorOccupied();
+
 			bike = inspector.inspect(bike);
-			Thread.sleep(Params.INSPECT_TIME);
-			System.out.println("Inspector has finished inspecting" + bike);
-			System.out.println("robot put " + bike + "   to short belt");
+
+			System.out.println();
+			System.out.println(belt.indentation + belt.indentation + belt.indentation + "robot is putting  " + bike
+					+ "  to the short belt");
+
+			sleep(Params.ROBOT_MOVE_TIME);
 			shortBelt.put(bike, 0);
-			           
-    		synchronized (belt){
-    			belt.canMove = true;
+
+			synchronized (belt) {
+				belt.setBeltCanMove();
+
+				System.out.println();
+				System.out.println(belt.indentation + "the main belt now can move due to the avaiable robot");
 
 				belt.notifyAll();
-				System.out.println("notify all 了啊！！ ");
+
 			}
 		}
+	}
+
+	public boolean isRobotOccupied() {
+		return isRobotOccupied;
+	}
+
+	public void setRobotOccupied() {
+		isRobotOccupied = true;
+	}
+
+	public void setRobotAvailable() {
+		isRobotOccupied = false;
 	}
 
 }

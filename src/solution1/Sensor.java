@@ -24,8 +24,9 @@ public class Sensor extends BicycleHandlingThread {
 
 				if (bike != null && bike.isTagged() == true && bike.isInspected() == false
 						&& robot.isRobotOccupied() == false) {
-					System.out.print(belt.indentation+belt.indentation+belt.indentation);
-					System.out.println("sensor find a tagged bike " + bike);
+					
+					System.out.println(belt.indentation + belt.indentation + belt.indentation
+							+ "sensor find a tagged bike " + bike);
 
 					robot.setRobotOccupied();
 					// belt.canMove = true;

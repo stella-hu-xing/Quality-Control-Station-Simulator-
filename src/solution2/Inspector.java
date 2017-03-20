@@ -2,8 +2,10 @@ package solution2;
 
 public class Inspector extends BicycleHandlingThread {
 
-	protected boolean isAvaliable = true;
-	protected Bicycle bikeToCheck;
+	protected boolean isInspectorAvailable = true;
+
+	// to help format output trace
+	final public static String indentation = "                  ";
 
 	public void run() {
 
@@ -17,14 +19,40 @@ public class Inspector extends BicycleHandlingThread {
 
 	protected synchronized Bicycle inspect(Bicycle bike) throws InterruptedException {
 
-		if (bike.tagged == true && bike.defective != true) {
+		System.out.println();
+		System.out.println(indentation + indentation + indentation + "The Inspctor is ready to check " + bike
+				+ "in a certain inspect time");
+
+		sleep(Params.INSPECT_TIME);
+
+		if (bike.isTagged() == true && bike.isDefective() != true) {
+
 			bike.setNotTagged();
-		//	bike.hasInspected = true;
-			System.out.println("inspector checked the bike " + bike.getId());
+
+			System.out.println();
+			System.out.println(indentation + indentation + indentation + "inspector have checked the wrong-tagged bike "
+					+ bike + " and correct");
+
+		} else {
+
+			System.out.println();
+			System.out.println(indentation + indentation + indentation + "inspector have checked the tagged bike "
+					+ bike + " and prove the tag");
 
 		}
-        isAvaliable = true;
+		setInspectorAvailable();
 		return bike;
 	}
 
+	public boolean isInspectorAvailable() {
+		return isInspectorAvailable;
+	}
+
+	public void setInspectorAvailable() {
+		isInspectorAvailable = true;
+	}
+
+	public void setInspectorOccupied() {
+		isInspectorAvailable = false;
+	}
 }

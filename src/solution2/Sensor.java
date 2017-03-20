@@ -5,7 +5,6 @@ public class Sensor extends BicycleHandlingThread {
 	protected Belt belt;
 	protected Robot robot;
 
-
 	public Sensor(Belt belt, Robot robot) {
 		super();
 		this.belt = belt;
@@ -13,30 +12,22 @@ public class Sensor extends BicycleHandlingThread {
 
 	}
 
-	private boolean temp = false;
-
 	public void run() {
 
 		while (!isInterrupted()) {
 
-	
-				Bicycle bike = belt.peek(2);
+			Bicycle bike = belt.peek(2);
 
+			if (bike != null && bike.isTagged() == true && robot.isRobotOccupied() == false) {
+				
+				System.out.println();
+				System.out.println(
+						belt.indentation + belt.indentation + belt.indentation + "sensor find a tagged bike " + bike);
 
-				if (bike != null && bike.isTagged() == true //&& bike.hasInspected == false
-						&& robot.isWorking == false) {
-					System.out.println("sensor find bike " + bike);
-
-					robot.isWorking = true;
-					
-				}else if(bike!=null&&bike.isTagged()==true //&& bike.hasInspected==false 
-						&& robot.isWorking==true){
-					belt.canMove = false;
-					
-				//	System.out.println("waiting for inspector to be finished");
-				}
-
-
+				robot.setRobotOccupied();
+			} else if (bike != null && bike.isTagged() == true && robot.isRobotOccupied() == true) {
+				belt.setBeltStop();
+			}
 		}
 
 		System.out.println("Sensor terminated");
