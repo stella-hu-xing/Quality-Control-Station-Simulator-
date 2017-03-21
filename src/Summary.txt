@@ -14,10 +14,10 @@
 
 6. all subclass need to add super() into all overrided methods                (get!)
 
-7. makefile 
+7. makefile                                                                    (get!)
 
-8. delete all packages
+8. delete all packages                                                         (get!)
 
 9. make some variable to be volatile                                           (get!)
 
-10. add more exception
+10. add more exception                                                         (get!)
