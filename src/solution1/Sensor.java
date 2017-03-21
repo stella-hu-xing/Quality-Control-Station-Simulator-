@@ -5,7 +5,6 @@ public class Sensor extends BicycleHandlingThread {
 	protected Belt belt;
 	protected Robot robot;
 
-
 	public Sensor(Belt belt, Robot robot) {
 		super();
 		this.belt = belt;
@@ -24,7 +23,7 @@ public class Sensor extends BicycleHandlingThread {
 
 				if (bike != null && bike.isTagged() == true && bike.isInspected() == false
 						&& robot.isRobotOccupied() == false) {
-					
+
 					System.out.println(belt.indentation + belt.indentation + belt.indentation
 							+ "sensor find a tagged bike " + bike);
 
@@ -34,7 +33,7 @@ public class Sensor extends BicycleHandlingThread {
 						&& robot.isRobotOccupied() == true) {
 					// belt.canMove = false;
 					belt.setBeltStop();
-					
+
 				}
 				temp = belt.haveMovedOnce();
 			}

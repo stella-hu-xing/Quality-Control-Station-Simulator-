@@ -14,9 +14,6 @@ public class Bicycle {
 	// specifies whether the bicycle is defective
 	protected boolean defective = false;
 
-	// specifies whether the bicycle has been inspected
-	// protected boolean hasInspected = false;
-
 	// the ID of this bicycle
 	protected int id;
 
@@ -26,7 +23,6 @@ public class Bicycle {
 	// create a new bicycle with a given ID
 	private Bicycle(int id) {
 		this.id = id;
-		// hasInspected = false;
 
 		if (r.nextFloat() < Params.TAG_PROB) {
 			tagged = true;
@@ -85,6 +81,9 @@ public class Bicycle {
 		return defective;
 	}
 
+	/**
+	 * Set the output format
+	 */
 	public String toString() {
 		String tFlag = tagged ? "t" : "-";
 		String dFlag = defective ? "d" : "-";

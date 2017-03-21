@@ -18,4 +18,6 @@
 
 8. delete all packages
 
-9. make some variable to be volatile
+9. make some variable to be volatile                                           (get!)
+
+10. add more exception

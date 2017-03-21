@@ -27,6 +27,9 @@ public class Robot extends BicycleHandlingThread {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					this.interrupt();
+				} catch (DefKnownException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
 			}
@@ -34,7 +37,7 @@ public class Robot extends BicycleHandlingThread {
 		}
 	}
 
-	protected synchronized void transferBetweenInspectorAndBelt() throws InterruptedException {
+	protected synchronized void transferBetweenInspectorAndBelt() throws InterruptedException, DefKnownException {
 		System.out.println();
 		System.out.println(belt.indentation + belt.indentation + belt.indentation
 				+ "robot is ready to take tagged bicycle from main belt");

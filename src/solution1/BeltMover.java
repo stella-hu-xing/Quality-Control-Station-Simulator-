@@ -29,6 +29,8 @@ public class BeltMover extends BicycleHandlingThread {
 				// spend BELT_MOVE_TIME milliseconds moving the belt
 				Thread.sleep(Params.BELT_MOVE_TIME);
 
+				// if the blet is not able to move, set the mover thread to wait
+				// for the state change of belt
 				while (belt.isCanMove() == false) {
 					System.out.print(belt.indentation + belt.indentation + belt.indentation);
 					System.out.println("the belt cannot move and begin to wait robot to be available");

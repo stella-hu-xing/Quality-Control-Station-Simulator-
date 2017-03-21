@@ -1,7 +1,10 @@
 package solution2;
 
 /**
- * The bicycle quality control belt
+ * 
+ * The main bicycle quality control belt, contains all its attributes and
+ * control methods.
+ *
  */
 public class Belt {
 
@@ -10,6 +13,10 @@ public class Belt {
 
 	// the length of this belt
 	protected int beltLength = 5;
+
+	// the segment which the sensor would check and robot would take bicycle and
+	// put back
+	protected int segmentToCheck = 3;
 
 	// the move status of the belt
 	private volatile boolean canMove = true;
@@ -84,18 +91,30 @@ public class Belt {
 	}
 
 	/**
+	 * Take a bicycle off the segment 3 from the belt
 	 * 
+	 * @return the removed bicycle
+	 * @throws InterruptedException
+	 *             if the thread executing is interrupted
+	 * @throws DefKnownException
+	 *             if the removed bicycle is not tagged as defective
 	 */
-	public synchronized Bicycle removeBicycle() throws InterruptedException {
+	public synchronized Bicycle removeBicycle() throws InterruptedException, DefKnownException {
 
-		Bicycle bike;
+		// get the elemnt at the check segment
+		Bicycle bike = segment[segmentToCheck - 1];
 
-		bike = segment[2];
-		segment[2] = null;
+		// clear the current segment
+		segment[segmentToCheck - 1] = null;
 
-		System.out.println();
+		// if the bike is not tagged as defective, throw an exception
+		if (bike.isTagged() == false) {
+			throw new DefKnownException("get a wrong bicycle without tag");
+		}
+
+		// make a note of the event in output trace
 		System.out.println(indentation + indentation + indentation + "the bike " + bike
-				+ " has been taken by robot arm from belt");
+				+ " has been taken from belt by robot arm ");
 
 		return bike;
 	}
@@ -170,27 +189,38 @@ public class Belt {
 		return true;
 	}
 
-	public String toString() {
-		return java.util.Arrays.toString(segment);
-	}
-
-	/*
+	/**
+	 * Get the final position of the belt
 	 * @return the final position on the belt
 	 */
 	public int getEndPos() {
 		return beltLength - 1;
 	}
 
+	/**
+	 * Set the belt status to be runnable from stop
+	 */
 	public void setBeltCanMove() {
 		canMove = true;
 	}
 
+	/**
+	 * Set the belt status to be stop
+	 */
 	public void setBeltStop() {
 		canMove = false;
 	}
 
+	/**
+	 *  Check whether the belt is able to move currently
+	 * @return true if the belt is currently able to move
+	 */
 	public boolean isCanMove() {
 		return canMove;
 	}
+	
+    public String toString() {
+        return java.util.Arrays.toString(segment);
+    }
 
 }

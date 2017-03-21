@@ -17,7 +17,7 @@ public class Inspector {
 		System.out.println(indentation + indentation + indentation + "The Inspctor is ready to check " + bike
 				+ "in a certain inspect time");
 
-		// Thread.sleep(Params.INSPECT_TIME);
+		Thread.sleep(Params.INSPECT_TIME);
 
 		if (bike.isTagged() == true && bike.isDefective() != true) {
 

@@ -23,7 +23,7 @@ public class Bicycle {
 	// the next ID that can be allocated
 	protected static int nextId = 1;
 
-	// create a new bicycle with a given ID
+	// create a new bicycle with a given ID, and initiate to be not inspected
 	private Bicycle(int id) {
 		this.id = id;
 		this.hasInspected = false;
@@ -77,13 +77,17 @@ public class Bicycle {
 	public void setNotTagged() {
 		tagged = false;
 	}
-
 	
-	
+	/**
+	 * @return true if and only if this bicycle has been inspected
+	 */
 	public boolean isInspected() {
 		return hasInspected;
 	}
 
+	/**
+	 * Mark this bicycle as inspected
+	 */
 	public void setInspected() {
 		hasInspected = true;
 	}
@@ -95,6 +99,9 @@ public class Bicycle {
 		return defective;
 	}
 
+	/**
+	 * Set the output format
+	 */
 	public String toString() {
 		String tFlag = tagged ? "t" : "-";
 		String dFlag = defective ? "d" : "-";

@@ -1,7 +1,10 @@
 package solution1;
 
 /**
- * The bicycle quality control belt
+ * 
+ * The bicycle quality control belt, contains all its attributes and control
+ * methods.
+ *
  */
 public class Belt {
 
@@ -10,12 +13,14 @@ public class Belt {
 
 	// the length of this belt
 	protected int beltLength = 5;
-	
-	
+
+	// the segment which the sensor would check and robot would take bicycle and put back
+	protected int segmentToCheck = 3;
+
+	// the figure represents whether the belt has moved once
 	private boolean hasMoved = false;
 
-	
-	//the move status of the belt
+	// the move status of the belt
 	private volatile boolean canMove = true;
 
 	// to help format output trace
@@ -52,7 +57,7 @@ public class Belt {
 		segment[index] = bicycle;
 
 		// make a note of the event in output trace
-		System.out.println(bicycle + " arrived" + "  segment "+ (index+1));
+		System.out.println(bicycle + " arrived" + "  segment " + (index + 1));
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
@@ -84,20 +89,35 @@ public class Belt {
 
 		// notify any waiting threads that the belt has changed
 		notifyAll();
+
 		return bicycle;
 	}
 
 	/**
+	 * Take a bicycle off the segment 3 from the belt
 	 * 
+	 * @return the removed bicycle
+	 * @throws InterruptedException
+	 *             if the thread executing is interrupted
+	 * @throws DefKnownException
+	 *             if the removed bicycle is not tagged as defective
 	 */
-	public synchronized Bicycle removeBicycle() throws InterruptedException {
+	public synchronized Bicycle removeBicycle() throws InterruptedException, DefKnownException {
 
-		Bicycle bike;
+		// get the elemnt at the check segment
+		Bicycle bike = segment[segmentToCheck-1];
 
-		bike = segment[2];
-		segment[2] = null;
+		// clear the current segment
+		segment[segmentToCheck-1] = null;
 
-		System.out.println(indentation+indentation+indentation+"the bike " + bike + " has been taken by robot arm from belt");
+		// if the bike is not tagged as defective, throw an exception
+		if (bike.isTagged() == false) {
+			throw new DefKnownException("get a wrong bicycle without tag");
+		}
+
+		// make a note of the event in output trace
+		System.out.println(indentation + indentation + indentation + "the bike " + bike
+				+ " has been taken from belt by robot arm ");
 
 		return bike;
 	}
@@ -111,8 +131,8 @@ public class Belt {
 	 *             if the thread executing is interrupted.
 	 */
 	public synchronized void move() throws InterruptedException, OverloadException {
-		// if there is something at the end of the belt,
-		// or the belt is empty, do not move the belt
+		
+		// if there is something at the end of the belt, or the belt is empty, do not move the belt
 		while (isEmpty() || segment[segment.length - 1] != null) {
 			wait();
 		}
@@ -132,7 +152,7 @@ public class Belt {
 		}
 		segment[0] = null;
 
-
+		// declare the a movement has been taken
 		hasMoved = !hasMoved;
 
 		// notify any waiting threads that the belt has changed
@@ -174,31 +194,46 @@ public class Belt {
 		}
 		return true;
 	}
-
-	public String toString() {
-		return java.util.Arrays.toString(segment);
-	}
-
-	/*
+	
+	/**
+	 * Get the final position of the belt
 	 * @return the final position on the belt
 	 */
 	public int getEndPos() {
 		return beltLength - 1;
 	}
-	
-	public void setBeltCanMove(){
+
+	/**
+	 * Set the belt status to be runnable from stop
+	 */
+	public void setBeltCanMove() {
 		canMove = true;
 	}
-	
-	public void setBeltStop(){
+
+	/**
+	 * Set the belt status to be stop
+	 */
+	public void setBeltStop() {
 		canMove = false;
 	}
-	
-	public boolean isCanMove(){
+
+	/**
+	 *  Check whether the belt is able to move currently
+	 * @return true if the belt is currently able to move
+	 */
+	public boolean isCanMove() {
 		return canMove;
 	}
-	
-	public boolean haveMovedOnce(){
+
+	/**
+	 * Check whether the belt has moved
+	 * @return true if the belt has moved
+	 */
+	public boolean haveMovedOnce() {
 		return hasMoved;
 	}
+	
+    public String toString() {
+        return java.util.Arrays.toString(segment);
+    }
 }
