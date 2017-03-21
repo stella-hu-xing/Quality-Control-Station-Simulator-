@@ -33,6 +33,7 @@ public class BeltMover extends BicycleHandlingThread {
 				// for the state change of belt
 				while (belt.isCanMove() == false) {
 
+					// make a note of the event in output trace
 					System.out.println();
 					System.out.println(
 							belt.indentation + "the main belt cannot move and begin to wait robot to be available");

@@ -14,7 +14,8 @@ public class Belt {
 	// the length of this belt
 	protected int beltLength = 5;
 
-	// the segment which the sensor would check and robot would take bicycle and put back
+	// the segment which the sensor would check and robot would take bicycle and
+	// put back
 	protected int segmentToCheck = 3;
 
 	// the figure represents whether the belt has moved once
@@ -105,10 +106,10 @@ public class Belt {
 	public synchronized Bicycle removeBicycle() throws InterruptedException, DefKnownException {
 
 		// get the elemnt at the check segment
-		Bicycle bike = segment[segmentToCheck-1];
+		Bicycle bike = segment[segmentToCheck - 1];
 
 		// clear the current segment
-		segment[segmentToCheck-1] = null;
+		segment[segmentToCheck - 1] = null;
 
 		// if the bike is not tagged as defective, throw an exception
 		if (bike.isTagged() == false) {
@@ -131,8 +132,9 @@ public class Belt {
 	 *             if the thread executing is interrupted.
 	 */
 	public synchronized void move() throws InterruptedException, OverloadException {
-		
-		// if there is something at the end of the belt, or the belt is empty, do not move the belt
+
+		// if there is something at the end of the belt, or the belt is empty,
+		// do not move the belt
 		while (isEmpty() || segment[segment.length - 1] != null) {
 			wait();
 		}
@@ -194,9 +196,10 @@ public class Belt {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Get the final position of the belt
+	 * 
 	 * @return the final position on the belt
 	 */
 	public int getEndPos() {
@@ -218,7 +221,8 @@ public class Belt {
 	}
 
 	/**
-	 *  Check whether the belt is able to move currently
+	 * Check whether the belt is able to move currently
+	 * 
 	 * @return true if the belt is currently able to move
 	 */
 	public boolean isCanMove() {
@@ -227,13 +231,14 @@ public class Belt {
 
 	/**
 	 * Check whether the belt has moved
+	 * 
 	 * @return true if the belt has moved
 	 */
 	public boolean haveMovedOnce() {
 		return hasMoved;
 	}
-	
-    public String toString() {
-        return java.util.Arrays.toString(segment);
-    }
+
+	public String toString() {
+		return java.util.Arrays.toString(segment);
+	}
 }

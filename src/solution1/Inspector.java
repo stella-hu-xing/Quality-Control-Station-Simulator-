@@ -32,8 +32,8 @@ public class Inspector {
 		}
 
 		// make a note of the event in output trace
-		System.out.println(indentation + indentation + indentation + "The Inspctor is ready to check " + bike
-				+ "in a inspect time");
+		System.out.println(indentation + indentation + indentation
+				+ "The Inspctor has received the bicycle and is ready to check " + bike + "in a inspect time");
 
 		// the inspection need time to execute
 		Thread.sleep(Params.INSPECT_TIME);
@@ -75,6 +75,7 @@ public class Inspector {
 
 	/**
 	 * Check whether the inspector is in use currently
+	 * 
 	 * @return true if the inspector is available
 	 */
 	public boolean isInspectorAvailable() {

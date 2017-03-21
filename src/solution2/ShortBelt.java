@@ -1,18 +1,26 @@
 package solution2;
 
 /**
+ * A short belt is similar to Belt but only receive bicycle from inspector and
+ * sent them to Consumer
  * 
  * @author xinghu
  *
  */
 public class ShortBelt extends Belt {
 
+	// the items in the belt segments
 	protected Bicycle[] segment_shortBelt;
 
+	// the length of this belt
 	protected int shortBeltLength = 2;
 
+	// to help format output trace
 	final private static String indentation = "                  ";
 
+	/**
+	 * Create a new, empty belt, initialised as empty
+	 */
 	public ShortBelt() {
 		segment_shortBelt = new Bicycle[shortBeltLength];
 		for (int i = 0; i < segment_shortBelt.length; i++) {
@@ -20,6 +28,16 @@ public class ShortBelt extends Belt {
 		}
 	}
 
+	/**
+	 * Put a bicycle on the belt.
+	 * 
+	 * @param bicycle
+	 *            the bicycle to put onto the belt.
+	 * @param index
+	 *            the place to put the bicycle
+	 * @throws InterruptedException
+	 *             if the thread executing is interrupted.
+	 */
 	public synchronized void put(Bicycle bicycle, int index) throws InterruptedException {
 
 		// while there is another bicycle in the way, block this thread
@@ -66,6 +84,14 @@ public class ShortBelt extends Belt {
 		return bicycle;
 	}
 
+	/**
+	 * Move the belt along one segment
+	 * 
+	 * @throws OverloadException
+	 *             if there is a bicycle at position beltLength.
+	 * @throws InterruptedException
+	 *             if the thread executing is interrupted.
+	 */
 	public synchronized void move() throws InterruptedException, OverloadException {
 
 		// if there is something at the end of the belt,
@@ -108,6 +134,9 @@ public class ShortBelt extends Belt {
 		return true;
 	}
 
+	/**
+	 * @return the maximum size of this belt
+	 */
 	public int length() {
 		return shortBeltLength;
 	}

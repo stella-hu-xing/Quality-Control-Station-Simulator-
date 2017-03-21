@@ -20,6 +20,7 @@ public class Sim {
 		Robot robot = new Robot(belt, inspector);
 		Sensor sensor = new Sensor(belt, robot);
 
+		// start all threads
 		consumer.start();
 		producer.start();
 		mover.start();

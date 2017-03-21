@@ -32,8 +32,10 @@ public class BeltMover extends BicycleHandlingThread {
 				// if the blet is not able to move, set the mover thread to wait
 				// for the state change of belt
 				while (belt.isCanMove() == false) {
-					System.out.print(belt.indentation + belt.indentation + belt.indentation);
-					System.out.println("the belt cannot move and begin to wait robot to be available");
+
+					System.out.println(belt.indentation + belt.indentation + belt.indentation
+							+ "the belt has been found another tagged bicycle and stop to wait robot to be available");
+
 					synchronized (belt) {
 						belt.wait();
 					}
