@@ -1,9 +1,7 @@
 Reflection:
 
-The file reflection.txt should contain 300–500 words evaluating the success or otherwise of your solution, identifying critical design decisions or problems that arose, and summarising any insights from experimenting with the simulator.
+The completed quality control station systems are currently able to execute successfully following the specification of requirement, present the supposed movements clearly and declare some possible problem-prone states. During the implementation process, I endeavor to apply the multiple threads theory and thinking in concurrency.
 
-(1. problem description)
-(2. important decision and their result)
-(3. understanding of concurrency)
+Depended on the original system structure, I implemented the Sensor, Robot as threads to initiate actions but treat Inspector as a monitor.  The primary classification idea bases on whether the entity is active to take actions or passive to receive orders.  In my system, SENSOR is implemented to be waiting when the third segment of the belt is vacant and be wake up to detect tagged bicycles on belt proactively during each movement of the belt, which should be consistent with the work procedure in the real world.   The INSPECTOR itself is a monitor because it has the thing done to it with the notification from ROBOT:  checking tagged bicycles. The ROBOT  always receives the signal from SENSOR and is notified of the status of INSPECTOR. Under the permitted condition, ROBOT would transfer particular bike between belt and INSPECTOR, otherwise, or join the waiting list of INSPECTOR.
 
-
+There are two particular design decisions I have made that want to mention. The first is that the ROBOT and INSPECTOR have been integrated to be a whole section instead of self-governed parts. The reason is that I try to avoid the dilemma situation of ROBOT. When INSPECTOR is occupied with a spare ROBOT, the ROBOT can catch the next tagged bicycle according to its independent logic, but then ROBOT would be stuck if there is a third tagged bicycle detected by SENSOR. This situation as well results in a deadlock, however, different from the specification. It would make things easier to consider ROBOT and INSPECTOR as a serial action set. The second decision is there is only one Consumer in my solution 2. According to the practical consideration that it is trivial that Consumer receives a few defective ones in a large number of products. It does not make sense for me to have another Consumer to get flawed bicycles particularly.
